@@ -1,0 +1,53 @@
+{
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1732371089224,
+      "tag": "20241123141129_sloppy_pretty_boy",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1732374342160,
+      "tag": "20241123150542_steady_wonder_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1734619218656,
+      "tag": "20241219144018_ancient_jigsaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1734620769031,
+      "tag": "20241219150609_minor_forgotten_one",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1734621992040,
+      "tag": "20241219152632_gifted_spiral",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1734622359233,
+      "tag": "20241219153239_tense_korvac",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1734636825667,
+      "tag": "20241219193345_icy_gabe_jones",
+      "breakpoints": true
+    }
+  ]
+}
