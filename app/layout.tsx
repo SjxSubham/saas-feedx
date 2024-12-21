@@ -7,6 +7,7 @@ import {
 } from '@clerk/nextjs'
 import './globals.css'
 import PageHeader from '@/components/page-headers'
+import Script from 'next/script'
 export default function RootLayout({
   children,
 }: {
