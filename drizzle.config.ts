@@ -14,7 +14,7 @@ export default defineConfig({
   },
   dbCredentials: {
     
-    url: process.env.DATABASE_URL ||  "postgresql://postgres.ojnmmpjlrzieugbetbdp:Andal@4249*@aws-0-ap-south-1.pooler.supabase.com:6543/postgres" // 5432 optioanl
+    url: process.env.DATABASE_URL ||  'postgres://localhost:5432/drizzle' // 5432 optioanl
         
   }
 });
