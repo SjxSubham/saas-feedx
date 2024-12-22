@@ -9,6 +9,7 @@ import './globals.css'
 import PageHeader from '@/components/page-headers'
 import Script from 'next/script'
 import Head from 'next/head'
+
 export default function RootLayout({
   children,
 }: {
@@ -26,7 +27,7 @@ export default function RootLayout({
         <Script src="https://feed-x-widget.vercel.app/feedx.umd.cjs">
         </Script>
           <PageHeader/>
-          {/* <my-widget></my-widget> */}
+          
           {children}
         </body>
       </html>
