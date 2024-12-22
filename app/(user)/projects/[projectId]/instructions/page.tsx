@@ -16,9 +16,9 @@ const page = ({ params }: {
         <code className=" text-white">
           {`<my-widget project-id="${params.projectId}"></my-widget>`}
           <br />
-          {`<script src="${process.env.WIDGET_URL}/widget.umd.js"></script>`}
+          {`<script src="${process.env.WIDGET_URL}/feedx.umd.cjs"></script>`}
         </code>
-        <CopyBtn text={`<my-widget project-id="${params.projectId}"></my-widget>\n<script src="${process.env.WIDGET_URL}/widget.umd.js"></script>`} />
+        <CopyBtn text={`<my-widget project-id="${params.projectId}"></my-widget>\n<script src="${process.env.WIDGET_URL}/feedx.umd.cjs"></script>`} />
       </div>
     </div>
   )
