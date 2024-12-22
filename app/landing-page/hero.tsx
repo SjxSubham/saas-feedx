@@ -40,7 +40,7 @@ const Hero = () => {
           </div>
         </div>
         <div className="flex-1 max-w-lg">
-          <Image src={'/demo.gif'} alt="demo" layout={'responsive'} width={155} height={155} unoptimized={true} />
+          <Image src={'/feedx.gif'} alt="demo" layout={'responsive'} width={155} height={155} unoptimized={true} />
         </div>
       </div>
     </section>

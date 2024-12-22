@@ -22,10 +22,12 @@ export default function RootLayout({
         <Head>
           <Script src="https://feed-x-widget.vercel.app/feedx.umd.cjs">
           </Script>
+          {/* <my-widget></my-widget> */}
         </Head>
         <body>
         <Script src="https://feed-x-widget.vercel.app/feedx.umd.cjs">
         </Script>
+        {/* <my-widget></my-widget> */}
           <PageHeader/>
           
           {children}
