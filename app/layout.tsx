@@ -18,13 +18,13 @@ export default function RootLayout({
   return (   
     <ClerkProvider>
      <html lang = "en">
-      
+      <body>
         
         
           <PageHeader/>
           
           {children}
-        
+          </body>
       </html>
     </ClerkProvider>
     
