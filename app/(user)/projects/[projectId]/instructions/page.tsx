@@ -18,10 +18,10 @@ const page = ({ params }: {
           <br />
           {`<script src="${process.env.WIDGET_URL}/feedx.umd.cjs"></script>`}
         </code>
-        <CopyBtn text={`<my-widget project-id="${params.projectId}"></my-widget>\n<script src="${process.env.WIDGET_URL}/feedx.umd.cjs"></script>`} />
+        <CopyBtn text={`<my-widget project-id="${params.projectId}"></my-widget>\n<script src="${process.env.WIDGET_URL}/dist/feedx.umd.cjs"></script>`} />
       </div>
     </div>
   )
 }
 
-export default page;
+export default page;  

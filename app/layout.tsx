@@ -18,8 +18,14 @@ export default function RootLayout({
   return (   
     <ClerkProvider>
      <html lang = "en">
-      <body>
-        
+      <Head>
+      <Script src='https://feed-x-widget.vercel.app/feedx.umd.cjs'>
+      </Script>
+     
+      </Head>
+<body>
+<Script src='https://feed-x-widget.vercel.app/feedx.umd.cjs'>
+</Script>
         
           <PageHeader/>
           
