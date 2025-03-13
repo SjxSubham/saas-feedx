@@ -579,6 +579,9 @@ function Table(props: { data: Feedback[] }) {
                 pointBorderColor: "#FFFFFF",
                 pointHoverBackgroundColor: "#FBBF24",
                 pointHoverBorderColor: "#F59E0B",
+                hoverBorderWidth: 3,
+                hoverBorderColor: "#DC2626",
+                hoverBackgroundColor: "#FFB703",
               },
             ],
           }}
