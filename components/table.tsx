@@ -45,7 +45,7 @@ function Table(props: { data: Feedback[] }) {
       {
         accessorFn: row => row.rating,
         id: 'rating',
-        cell: info => info.getValue()?<span>N/A</span>:<Ratings rating={info.getValue() as number} count={5} />,
+        cell: info => info.getValue()=== null ? <span>N/A</span> : <Ratings rating={info.getValue() as number} count={5} />,
         header: () => <span>Rating</span>,
         footer: props => props.column.id,
       },
