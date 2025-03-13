@@ -4,11 +4,11 @@ const Footer = () => {
       <div className="container mx-auto text-center">
         <h2 className="text-lg font-semibold text-gray-800">FeedX</h2>
         <p className="text-sm text-gray-500 mt-2">
-          © Made by team HackXobits 2024. All rights reserved.
+          © Made by Sjx_Subham 2024. All rights reserved.
         </p>
       </div>
     </footer>
   );
 };
-
+// team HackXobits 2024
 export default Footer;
