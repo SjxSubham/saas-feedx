@@ -16,13 +16,13 @@ const ProjectList = (props: Props) =>{
             <ul className="grid grid-cols-1 md:grid-cols-3 m-5 p-4 gap-4">
                 {props.projects.map((project: Project) => (
                     <li key={project.id}>
-                        <Card className="max-w-[350px] flex flex-col h-full">
+                        <Card className="max-w-[350px] flex flex-col h-full hover:shadow-cyan-200 shadow-lg">
                             <CardHeader className="flex-1">
                                 <CardTitle>{project.name}</CardTitle>
                                 <CardDescription>{project.description}</CardDescription>
                             </CardHeader>
                             <Link href={`/projects/${project.id}`}>
-                            <Button className="from-gray-950 via-gray-700 to-gray-500 bg-gradient-to-r justify-center ">View Project</Button>
+                            <Button className="from-gray-950 via-gray-700 to-gray-500 bg-gradient-to-r justify-center hover:shadow-gray-300  shadow-md ">View Project</Button>
                             </Link>
                             <CardFooter>
 
@@ -30,7 +30,7 @@ const ProjectList = (props: Props) =>{
                         </Card>
                     </li>
                 ))}
-                <Card className="max-w-[350px] flex flex-col h-full bg-gray-300">
+                <Card className="max-w-[350px] mt-4 py-2 hover:shadow-indigo-300 drop-shadow-2xl flex flex-col h-full bg-gray-300">
                     <CardHeader className="flex-1">
                         <CardTitle className="flex flex-row text-sm md:text-lg justify-center">
                             <Lock size={10} className="h-4 w-4 md:h-8 md:w-8 mr-2"/>

@@ -13,7 +13,7 @@ const Hero = () => {
     <section className="grow">
       <div className="container mx-auto px-4 mb-24 mt-4 flex flex-col md:flex-row justify-center">
         <div className="flex flex-col max-w-sm justify-center">
-          <div className="mb-8">
+          <div className="bg-white shadow-lg p-6 rounded-3xl mt-6 relative mb-8">
             <h1 className="mb-5 text-5xl font-extrabold leading-tight">Collect your feedback seamlessly</h1>
             <p className="text-gray-500 texl-lg">Easily integrate FeedX and start collecting feedback today.</p>
           </div>
@@ -21,7 +21,7 @@ const Hero = () => {
             <SignedOut>
               <SignUpButton>
                 <div className="flex gap-3">
-                  {/* <Button>
+                  <Button className="shadow-sm hover:shadow-gray-500">
                     <LogIn className="w-4 h-4 mr-2" />
                     Get Started</Button>
                   <Button variant="secondary" asChild>
@@ -29,17 +29,17 @@ const Hero = () => {
                       <Github className="w-4 h-4 mr-2" />
                       GitHub
                     </Link>
-                  </Button> */}
+                  </Button>
                 </div>
               </SignUpButton>
             </SignedOut>
             <SignedIn>
-              <Button asChild>
+              <Button className="shadow-lg hover:shadow-gray-500" asChild>
                 <Link href="/dashboard">Dashboard</Link></Button>
             </SignedIn>
           </div>
         </div>
-        <div className="flex-1 max-w-lg">
+        <div className="flex-1 max-w-md shadow-sm hover:shadow-cyan-300">
           <Image src={'/feedx.gif'} alt="demo" layout={'responsive'} width={155} height={155} unoptimized={true} />
         </div>
       </div>
