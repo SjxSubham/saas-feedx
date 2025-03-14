@@ -31,7 +31,7 @@ const PricingCard = ({ title, price, description, features, isPopular, url }: Pr
         <ul>
           {
             features.map((feature, index) => (
-              <li key={index} className="flex flex-row items-center text-gray-700 gap-2 my-2">
+              <li key={index} className="flex flex-row items-center font-mono gap-2 my-2">
                 <div className="rounded-full flex items-center justify-center bg-gray-900 w-4 h-4 mr-2">
                   <Check className="text-white" width={10} height={10} />
                 </div>

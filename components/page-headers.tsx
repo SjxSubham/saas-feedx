@@ -22,7 +22,6 @@ const PageHeader = () => {
         <header className='w-full sticky inset-x-0 top-0 z-30 transition-all bg-white/20 backdrop-blur-md'>
             <div className='w-full max-w-screen-xl px-2.5 lg:px-20 relative mx-auto border-b'>
                 <div className='flex h-14 items-center justify-between'>
-                <ThemeToggleButton />
                     <Link href="/">
                         {loading ? (
                             <Loading /> // Render loading 
@@ -40,10 +39,14 @@ const PageHeader = () => {
                             </SignUpButton>
                         </SignedOut>
                         <SignedIn>
+                          
+                        <ThemeToggleButton />
+                       
                             <HeaderMenu />
                             <UserButton />
                         </SignedIn>
                     </div>
+
                 </div>
             </div>
         </header>
