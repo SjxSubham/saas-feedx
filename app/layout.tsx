@@ -7,6 +7,7 @@ import {
 } from '@clerk/nextjs'
 import './globals.css'
 import PageHeader from '@/components/page-headers'
+import { ThemeProvider } from '@/components/ThemeContext';
 
 
 export default function RootLayout({
@@ -21,10 +22,11 @@ export default function RootLayout({
 <body>
 {/* <Script id="feedx-widget" src='https://feed-x-widget.vercel.app/widget.umd.js'>
 </Script> */}
-        
+          <ThemeProvider>
           <PageHeader/>
           
           {children}
+          </ThemeProvider>
           </body>
       </html>
     </ClerkProvider>

@@ -13,14 +13,16 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import HeaderMenu from './header-menu';
 import Loading from '@/app/(user)/loading';
+import ThemeToggleButton from '@/components/ThemeToggleButton';
 
 const PageHeader = () => {
     const [loading, setLoading] = useState(false); 
 
     return (
-        <header className='w-full sticky transition-all inset-x-0 top-0 z-30 transition-all bg-white/20 backdrop-blur-md'>
+        <header className='w-full sticky inset-x-0 top-0 z-30 transition-all bg-white/20 backdrop-blur-md'>
             <div className='w-full max-w-screen-xl px-2.5 lg:px-20 relative mx-auto border-b'>
                 <div className='flex h-14 items-center justify-between'>
+                <ThemeToggleButton />
                     <Link href="/">
                         {loading ? (
                             <Loading /> // Render loading 
