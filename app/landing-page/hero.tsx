@@ -21,7 +21,7 @@ const Hero = () => {
             <SignedOut>
               <SignUpButton>
                 <div className="flex gap-3">
-                  <Button>
+                  {/* <Button>
                     <LogIn className="w-4 h-4 mr-2" />
                     Get Started</Button>
                   <Button variant="secondary" asChild>
@@ -29,7 +29,7 @@ const Hero = () => {
                       <Github className="w-4 h-4 mr-2" />
                       GitHub
                     </Link>
-                  </Button>
+                  </Button> */}
                 </div>
               </SignUpButton>
             </SignedOut>

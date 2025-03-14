@@ -1,5 +1,6 @@
 "use client";
-import { Clipboard } from 'lucide-react';
+
+import { Share2 } from "lucide-react";
 import {
     Tooltip,
     TooltipContent,
@@ -7,23 +8,23 @@ import {
     TooltipTrigger,
   } from "@/components/ui/tooltip"
   
-    const CopyButton = ({ text }:{
+    const CopyBtn = ({ text }:{
         text: string
     }) => {
         const copyToClipboard = (text: string) => {
             navigator.clipboard.writeText(text).then(() => {
-                alert('Copied to clipboard');
+                alert('Link Copied to clipboard');
             })
         }
         
         return (
             <TooltipProvider>
         <Tooltip>
-            <TooltipTrigger asChild><button onClick={ ()=> copyToClipboard(text)} className="text-slate-50 absolute right-0 top-0 p-2" >
-            <Clipboard size={20}/></button>
+            <TooltipTrigger asChild><button onClick={ ()=> copyToClipboard(text)} className="text-gray-500 mb-2 p-2" >
+            <Share2 size={20}/></button>
             </TooltipTrigger>
             <TooltipContent>
-            <p>Copy code</p>
+            <p>Copy Link</p>
             </TooltipContent>
         </Tooltip>
         </TooltipProvider>
@@ -33,4 +34,4 @@ import {
   
 };
 
-export default CopyButton;
+export default CopyBtn;

@@ -1,4 +1,5 @@
-import CopyBtn from "@/components/copy-btn";
+import CopyButton from "@/components/copy-btn";
+import CopyBtn from "@/components/CopyButton";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ClipboardCopy, CornerUpLeft, Link2 } from "lucide-react";
 import Link from "next/link";
@@ -28,6 +29,7 @@ const page = ({ params }: {
       <Link href="https://feed-x-widget.vercel.app/">
       <Button className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% ... flex items-center mb-3 w-fit"><Link2 className="h-5 w-5 mr-1" /><span className="text-lg">Share Link</span></Button>
       </Link>
+      <CopyBtn text={`https://feed-x-widget.vercel.app`}/>
       </div>
       </div>
       
@@ -42,7 +44,7 @@ const page = ({ params }: {
           <br />
           {`<script src="${process.env.WIDGET_URL}/widget.umd.js"></script>`}
         </code>
-        <CopyBtn text={`<my-widget project-id="${params.projectId}"></my-widget>\n<script src="${process.env.WIDGET_URL}/dist/widget.umd.js"></script>`} />
+        <CopyButton text={`<my-widget project-id="${params.projectId}"></my-widget>\n<script src="${process.env.WIDGET_URL}/dist/widget.umd.js"></script>`} />
 
         
         </div>
