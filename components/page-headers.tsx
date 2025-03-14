@@ -40,8 +40,8 @@ const PageHeader = () => {
                         </SignedOut>
                         <SignedIn>
                           
-                        <ThemeToggleButton />
-                       
+                        {/* <ThemeToggleButton />  */}
+                        
                             <HeaderMenu />
                             <UserButton />
                         </SignedIn>
