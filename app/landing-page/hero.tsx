@@ -39,7 +39,7 @@ const Hero = () => {
             </SignedIn>
           </div>
         </div>
-        <div className="flex-1 max-w-md shadow-md">
+        <div className="flex-1 max-w-md hover:shadow-emerald-200 shadow-md">
           <Image src={'/feedx.gif'} alt="demo" layout={'responsive'} width={155} height={155} unoptimized={true} />
         </div>
       </div>
