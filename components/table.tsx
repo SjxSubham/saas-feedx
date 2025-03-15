@@ -441,7 +441,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { ChevronRight, ChevronLeft, ChevronsRight, ChevronsLeft } from "lucide-react";
 import Ratings from "./ratings";
-import { Bar, Pie, Line } from "react-chartjs-2";
+import { Bar, Pie, Line, Scatter } from "react-chartjs-2";
 import {
   Column,
   ColumnDef,
@@ -612,6 +612,8 @@ function Table(props: { data: Feedback[] }) {
             },
           }}
         />
+        
+
       </div>
     </div>
   );

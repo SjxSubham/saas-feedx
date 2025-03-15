@@ -6,10 +6,12 @@ import Link from "next/link";
 import SubsribeBtn from "../payments/subscribe-btn";
 import {monthlyPlanId} from "@/lib/payments";
 import {Lock} from "lucide-react"
+
 type Project = InferSelectModel<typeof projects>;
 type Props = {
     projects: Project[];
 }
+
 const ProjectList = (props: Props) =>{
     return (
         <div>

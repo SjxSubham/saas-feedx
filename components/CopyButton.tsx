@@ -13,7 +13,7 @@ import {
     }) => {
         const copyToClipboard = (text: string) => {
             navigator.clipboard.writeText(text).then(() => {
-                alert('Link Copied to clipboard');
+                alert('Link Copied to clipboard ');
             })
         }
         
