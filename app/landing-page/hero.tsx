@@ -27,7 +27,7 @@ const Hero = () => {
                   <Button variant="secondary" asChild>
                     <Link href="https://github.com/SjxSubham/saas-feedx/wiki">
                       <Github className="w-4 h-4 mr-2" />
-                      GitHub
+                      Star on GitHub
                     </Link>
                   </Button>
                 </div>
