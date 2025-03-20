@@ -23,6 +23,9 @@
 #file
 hero-startercode.tsx
 feature-startercode.tsx
+starter-page.tsx
+SharePopup.tsx
+
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -14,7 +15,9 @@ import {
   import { Plus } from "lucide-react";
   import { createProject } from "@/actions/createProject";
   import SubmitButton from "@/components/submit-proj-btn";
+
 const NewProjBtn = () => {
+
     return (
         <Dialog>
             <DialogTrigger asChild><Button className="from-indigo-950 via-cyan-700 to-cyan-500 bg-gradient-to-r rounded-full">
@@ -31,11 +34,11 @@ const NewProjBtn = () => {
             <div className="grid sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
             <Label htmlFor="name">Project Name</Label>
-            <Input id="name" name="name" placeholder="Project Name" />
+            <Input id="name" name="name" placeholder="Project Name"/>
             </div>
             <div className="flex flex-col gap-2">
             <Label htmlFor="url">URL</Label>
-        <Input id="url" name="url" placeholder="https://example.com" />
+        <Input id="url" name="url" placeholder="https://example.com"/>
         </div>
         </div>
         <div className="flex flex-col gap-2">
@@ -44,8 +47,7 @@ const NewProjBtn = () => {
         </div>
             <SubmitButton />
         </form>
-        
-            
+                   
         
     </DialogContent>
     </Dialog>
