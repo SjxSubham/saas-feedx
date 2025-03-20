@@ -1,6 +1,6 @@
 "use client";
 
-import { Share2 } from "lucide-react";
+import { Copy, Share2 } from "lucide-react";
 import {
     Tooltip,
     TooltipContent,
@@ -20,8 +20,8 @@ import {
         return (
             <TooltipProvider>
         <Tooltip>
-            <TooltipTrigger asChild><button onClick={ ()=> copyToClipboard(text)} className="text-gray-500 mb-2 p-2" >
-            <Share2 size={20}/></button>
+            <TooltipTrigger asChild><button onClick={ ()=> copyToClipboard(text)} className="text-gray-600 mb-2 px-4" >
+            <Copy  size={20}/></button>
             </TooltipTrigger>
             <TooltipContent>
             <p>Copy Link</p>
