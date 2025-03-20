@@ -17,7 +17,7 @@ import {
 const NewProjBtn = () => {
     return (
         <Dialog>
-            <DialogTrigger asChild><Button className="from-gray-950 via-gray-700 to-gray-400 bg-gradient-to-r rounded-full">
+            <DialogTrigger asChild><Button className="from-indigo-950 via-cyan-700 to-cyan-500 bg-gradient-to-r rounded-full">
                 <Plus className="w-4 h-4 "/>Create</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] rounded-md">

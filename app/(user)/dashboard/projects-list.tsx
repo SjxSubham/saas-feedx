@@ -24,7 +24,7 @@ const ProjectList = (props: Props) =>{
                                 <CardDescription>{project.description}</CardDescription>
                             </CardHeader>
                             <Link href={`/projects/${project.id}`}>
-                            <Button className="from-gray-950 via-gray-700 to-gray-500 bg-gradient-to-r justify-center hover:shadow-gray-300  shadow-md ">View Project</Button>
+                            <Button className="from-indigo-950 via-cyan-700 to-cyan-500 bg-gradient-to-r justify-center hover:shadow-gray-300  shadow-md ">View Project</Button>
                             </Link>
                             <CardFooter>
 

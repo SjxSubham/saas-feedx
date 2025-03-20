@@ -30,7 +30,7 @@ const Hero = () => {
   return (
     <section className="grow">
       <div className="container mx-auto px-4 mb-24 mt-4 flex flex-col md:flex-row justify-center">
-        {/* Left Section */}
+        
         <motion.div
           className="flex flex-col max-w-sm justify-center"
           onMouseMove={handleMouseMove}
