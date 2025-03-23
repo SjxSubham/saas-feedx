@@ -439,7 +439,7 @@
 
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { ChevronRight, ChevronLeft, ChevronsRight, ChevronsLeft } from "lucide-react";
+import { ChevronRight, ChevronLeft, ChevronsRight, ChevronsLeft, ChartNoAxesCombined } from "lucide-react";
 import Ratings from "./ratings";
 import { Bar, Pie, Line, Scatter } from "react-chartjs-2";
 import {
@@ -474,8 +474,8 @@ function Table(props: { data: Feedback[] }) {
       <div className="w-full lg:w-3/4">
         <MyTable data={props.data} />
       </div>
-      <div className="w-full lg:w-1/4 bg-white p-4 shadow-2xl rounded-lg right-4 top-16 h-auto flex flex-col fixed gap-4 overflow-y-auto max-h-screen">
-        <h1 className="text-xl font-bold">Analytics</h1>
+      <div className="w-full lg:w-1/4 bg-white p-4 shadow-2xl rounded-lg right-4 top-16 h-auto flex flex-col fixed gap-4 backdrop-blur-md overflow-y-auto max-h-screen">
+      <h1 className="text-xl flex gap-2 font-bold">Analytics<ChartNoAxesCombined /></h1>
         <h2 className="text-lg font-semibold mb-2">Feedback Summary</h2>
         <Pie
           data={{
@@ -487,6 +487,7 @@ function Table(props: { data: Feedback[] }) {
                 borderColor: "#ffffff",
                 borderWidth: 2,
                 hoverOffset: 10,
+              
               },
             ],
           }}
@@ -532,7 +533,7 @@ function Table(props: { data: Feedback[] }) {
                 ],
                 backgroundColor: ["#F59E0B", "#EF4444", "#6366F1", "#10B981", "#3B82F6"],
                 borderColor: "#ffffff",
-                borderWidth: 2,
+                borderWidth: 5,
                 hoverBackgroundColor: "#1E40AF",
                 hoverBorderWidth: 3,
               },
@@ -570,7 +571,7 @@ function Table(props: { data: Feedback[] }) {
             labels: labels,
             datasets: [
               {
-                label: "Feedback Over Time",
+                label: "Feedback Over User",
                 data: props.data.map((f) => f.rating),
                 borderColor: "#EC4899",
                 backgroundColor: "rgba(236, 72, 153, 0.2)",
@@ -595,7 +596,7 @@ function Table(props: { data: Feedback[] }) {
                     size: 14,
                     weight: "bold",
                   },
-                  padding: 15,
+                  padding: 20,
                   color: "#333",
                 },
               },
@@ -604,7 +605,7 @@ function Table(props: { data: Feedback[] }) {
                 bodyColor: "#fff",
                 titleColor: "#fff",
                 bodyFont: {
-                  size: 14,
+                  size: 12,
                 },
                 padding: 10,
                 cornerRadius: 5,
