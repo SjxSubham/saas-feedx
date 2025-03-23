@@ -25,6 +25,7 @@ hero-startercode.tsx
 feature-startercode.tsx
 starter-page.tsx
 SharePopup.tsx
+grid.tsx
 
 # debug
 npm-debug.log*
