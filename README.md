@@ -1,15 +1,14 @@
-# FeedX : A Feedback collection SaaS platform 🔥... Add -> Share -> Collect -> View
-
+# FeedX : A Feedback collection SaaS platform 🔥... 
 
 ### Checkout 
 ## [FeedX](https://feedx.vercel.app/) 
 
 
 
-<tr>
   ![diagram-export-3-24-2025-12_10_28-AM](https://github.com/user-attachments/assets/747d7edc-15f8-4c86-a341-143c8e105101)
 
-</tr>
+> Add -> Share -> Collect -> View
+
 
 ### Latest Update - Added Analytics for better view 
 
