@@ -22,3 +22,4 @@ https://github.com/user-attachments/assets/7f60ebd5-e388-4a23-a834-e6e3b69eef1e
 ### If U like this project give feedback of FeedX too - [Give Your valuable Feedbacks here](https://feed-x-widget.vercel.app/?projectId=22)
 
 >  If you have any feature request, Bug report or if You think any UI changes required feel free to raise  Issue, PR.... Contributors are most Welcome, `Proudly Opensourced ❤️‍🔥`
+<!-- GitAds-Verify: LA1FBDSFRHZOGGHMOYSRUDRSW8QC65EB -->
