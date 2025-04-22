@@ -470,13 +470,13 @@ function Table(props: { data: Feedback[] }) {
   const labels = props.data.map((_, index) => `Feedback ${index + 1}`);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 p-4 relative">
+    <div className="flex flex-col lg:flex-row gap-8 p-4 dark:bg-black relative">
       <div className="w-full lg:w-3/4">
         <MyTable data={props.data} />
       </div>
-      <div className="w-full lg:w-1/4 bg-white p-4 shadow-2xl rounded-lg right-4 top-16 h-auto flex flex-col fixed gap-4 backdrop-blur-md overflow-y-auto max-h-screen">
-      <h1 className="text-xl flex gap-2 font-bold">Analytics<ChartNoAxesCombined /></h1>
-        <h2 className="text-lg font-semibold mb-2">Feedback Summary</h2>
+      <div className="w-full lg:w-1/4 bg-white p-4 shadow-2xl rounded-lg right-4 top-16 h-screen flex flex-col fixed gap-4 backdrop-blur-md overflow-y-auto">
+      <h1 className="text-xl flex gap-2 dark:text-black font-bold">Analytics<ChartNoAxesCombined /></h1>
+        <h2 className="text-lg font-semibold dark:text-gray-700 mb-2">Feedback Summary</h2>
         <Pie
           data={{
             labels: ["Positive", "Neutral", "Negative"],

@@ -21,7 +21,7 @@ export default async function Page(){
     const subscribed = await getSubscription({userId});
     
     return (
-       <div>
+       <div className="bg-gray-300 shadow-2xl shadow-emerald-300 ">
         <div className="flex items-center justify-center gap-3">
         <h1 className="text-3xl font-bold text-center my-4 ">Your Projects List</h1>
         </div>

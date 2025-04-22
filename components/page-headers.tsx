@@ -22,14 +22,25 @@ const PageHeader = () => {
         <header className='w-full sticky inset-x-0 top-0 z-30 transition-all bg-white/20 backdrop-blur-md'>
             <div className='w-full max-w-screen-xl px-2.5 lg:px-20 relative mx-auto border-b'>
                 <div className='flex h-14 items-center justify-between'>
-                    <Link href="/">
+                    <Link href="/" className="relative">
                         {loading ? (
-                            <Loading /> // Render loading 
+                            <Loading />
                         ) : (
-                            <Image src="/image.svg" alt="Logo" width={110} height={90} />
+                            < div className="relative w-[110px] h-[90px] flex items-center justify-center">
+                                
+                                    <Image 
+                                        src="/image.svg" 
+                                        alt="FeedX Logo" 
+                                        width={90} 
+                                        height={70}
+                                        className="object-contain"
+                                        priority
+                                    />
+                                
+                            </div>
                         )}
                     </Link>
-                    <div>
+                    <div className="flex items-center gap-4">
                         <SignedOut>
                             <SignInButton>
                                 <Button className='bg-black rounded-md'>Sign IN</Button>
@@ -39,14 +50,13 @@ const PageHeader = () => {
                             </SignUpButton>
                         </SignedOut>
                         <SignedIn>
-                          
-                        {/* <ThemeToggleButton />  */}
-                        
+                            {/* <div className='flex '>
+                            <ThemeToggleButton/> 
+                            </div> */}
                             <HeaderMenu />
                             <UserButton />
                         </SignedIn>
                     </div>
-
                 </div>
             </div>
         </header>
