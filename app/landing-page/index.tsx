@@ -6,7 +6,7 @@ import Footer from './footer';
 const LandingPage = () => {
   return (
     <div>
-      <Hero />
+      <Hero/>
       <FeaturesSection />
       
       <PricingSection />

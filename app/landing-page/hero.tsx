@@ -44,7 +44,7 @@ const Hero = () => {
             transition: "transform 0.1s ease-out",
           }}
         >
-          <div className="bg-white/20 shadow-lg p-6 rounded-3xl mt-6 relative mb-8">
+          <div className="bg-white/80 shadow-lg p-6 rounded-3xl mt-6 relative mb-8">
             <h1 className="mb-5 text-5xl font-extrabold leading-tight">
               Collect your feedback seamlessly
             </h1>
