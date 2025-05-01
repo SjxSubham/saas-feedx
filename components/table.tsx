@@ -643,6 +643,7 @@ function MyTable({ data }: { data: Feedback[] }) {
     {
       accessorKey: "message",
       header: "Message",
+      
     },
   ];
 
@@ -659,12 +660,12 @@ function MyTable({ data }: { data: Feedback[] }) {
 
   return (
     <div className="p-4 bg-slate-300 shadow-2xl rounded-lg">
-      <table className="w-full border-collapse">
+      <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id} className="border-b">
+            <tr key={headerGroup.id} className="border-dotted">
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="p-3 text-left">
+                <th key={header.id} className="p-3 text-center">
                   {flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
@@ -673,9 +674,9 @@ function MyTable({ data }: { data: Feedback[] }) {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="border-b">
+            <tr key={row.id} className="bg-gray-300 dark:border-separate rounded-3xl ">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="p-3">
+                <td key={cell.id} className="font-serif text-justify animate-bounce p-3">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -686,14 +687,14 @@ function MyTable({ data }: { data: Feedback[] }) {
       <div className="h-2" />
        <div className="flex items-center gap-2">
          <button
-          className="border rounded p-1 bg-gray-50 cursor-pointer"
+          className="border rounded p-1 bg-gray-400 cursor-pointer"
           onClick={() => table.firstPage()}
           disabled={!table.getCanPreviousPage()}
         >
           <ChevronsLeft/>
         </button>
         <button
-          className="border rounded p-1 bg-gray-50 cursor-pointer"
+          className="border rounded p-1 bg-gray-400 cursor-pointer"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
@@ -701,22 +702,22 @@ function MyTable({ data }: { data: Feedback[] }) {
           <ChevronLeft/>
         </button>
         <button
-          className="border rounded p-1 bg-gray-50 cursor-pointer"
+          className="border rounded p-1 bg-gray-400 cursor-pointer"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
           <ChevronRight/>
         </button>
         <button
-          className="border rounded p-1 cursor-pointer"
+          className="border rounded p-1 bg-gray-400 cursor-pointer"
           onClick={() => table.lastPage()}
           disabled={!table.getCanNextPage()}
         >
           <ChevronsRight/>
         </button>
-        <span className="flex items-center gap-1">
+        <span className="flex font-mono items-center bg-gray-300 gap-1">
           | Go to page:
-          <input
+          <input 
             type="number"
             min="1"
             max={table.getPageCount()}
@@ -725,17 +726,17 @@ function MyTable({ data }: { data: Feedback[] }) {
               const page = e.target.value ? Number(e.target.value) - 1 : 0
               table.setPageIndex(page)
             }}
-            className="border p-1 rounded w-16"
+            className="border p-1 rounded w-16 bg-gray-400"
           />
         </span>
-        <select
+        <select className="text-mono rounded-lg bg-gray-300"
           value={table.getState().pagination.pageSize}
           onChange={e => {
             table.setPageSize(Number(e.target.value))
           }}
         >
           {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
+            <option key={pageSize} value={pageSize} >
               Show {pageSize}
             </option>
           ))}
