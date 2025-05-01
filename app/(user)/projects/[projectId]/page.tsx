@@ -39,12 +39,12 @@ const Page = async ({ params }: {
                         <h2 className="text-primary-background font-mono text-xl py-1 px-5">{project.description}</h2>
                     </div>
                     <div className="flex flex-col">
-                        {project.url ? <Link href={project.url} className="underline text-indigo-700 flex items-center p-4"><Globe className="h-5 w-5 mr-1" /><span className="text-lg">Visit Site</span></Link> : null}
-                        <Link href={`/projects/${params.projectId}/instructions`} className="underline text-indigo-700 flex items-center mt-2 px-2">
+                        {project.url ? <Link href={project.url} className="underline text-indigo-200 flex items-center p-4"><Globe className="h-5 w-5 mr-1" /><span className="text-lg">Visit Site</span></Link> : null}
+                        <Link href={`/projects/${params.projectId}/instructions`} className="underline text-indigo-200 flex items-center mt-2 px-2">
                             <Code className="h-5 w-5 mr-1" /><span className="text-lg">Share Link / Embed Code</span></Link></div>
                 </div>
             </div>
-            <div>
+            <div >
                 <Table data={project.feedbacks} />
             </div>
         </div>

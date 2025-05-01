@@ -470,8 +470,8 @@ function Table(props: { data: Feedback[] }) {
   const labels = props.data.map((_, index) => `Feedback ${index + 1}`);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 p-4 dark:bg-black relative">
-      <div className="w-full lg:w-3/4">
+    <div className="flex flex-col lg:flex-row gap-8 p-4 dark:bg-transparent relative">
+      <div className="w-full dark:text-black lg:w-3/4">
         <MyTable data={props.data} />
       </div>
       <div className="w-full lg:w-1/4 bg-white p-4 shadow-2xl rounded-lg right-4 top-16 h-screen flex flex-col fixed gap-4 backdrop-blur-md overflow-y-auto">
@@ -658,7 +658,7 @@ function MyTable({ data }: { data: Feedback[] }) {
   });
 
   return (
-    <div className="p-4 bg-white shadow-2xl rounded-lg">
+    <div className="p-4 bg-slate-300 shadow-2xl rounded-lg">
       <table className="w-full border-collapse">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
