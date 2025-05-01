@@ -20,7 +20,7 @@ const PageHeader = () => {
 
     return (
         <header className='w-full sticky inset-x-0 top-0 z-30 transition-all bg-white/20 backdrop-blur-md'>
-            <div className='w-full max-w-screen-xl px-2.5 lg:px-20 relative mx-auto border-b'>
+            <div className='w-full max-w-screen-xl px-2.5 lg:px-20 relative mx-auto border-stone-100'>
                 <div className='flex h-14 items-center justify-between'>
                     <Link href="/" className="relative">
                         {loading ? (
@@ -33,7 +33,7 @@ const PageHeader = () => {
                                         alt="FeedX Logo" 
                                         width={90} 
                                         height={70}
-                                        className="object-contain dark:bg-white/50 rounded-lg"
+                                        className="object-contain dark:bg-gradient-to-r from-sky-300 to-cyan-600 rounded-full bg-blend-overlay"
                                         priority
                                     />
                                 
