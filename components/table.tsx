@@ -676,7 +676,7 @@ function MyTable({ data }: { data: Feedback[] }) {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className="bg-gray-300 dark:border-separate rounded-3xl ">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="font-serif text-justify animate-bounce p-3">
+                <td key={cell.id} className="font-serif text-justify animate-custom-bounce p-3">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
