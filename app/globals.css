@@ -93,3 +93,18 @@ body.dark {
 main {
   flex: 1;
 }
+
+/************ Starter */
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #17303a, #3c90ac, #2c5364);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  border-radius: 1rem;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

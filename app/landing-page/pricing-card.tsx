@@ -11,7 +11,8 @@ const PricingCard = ({ title, price, description, features, isPopular, url }: Pr
   }
 
   return (
-    <div className="border flex flex-col justify-between bg-white/20 rounded-lg h-full p-6 hover:shadow-emerald-200 shadow-lg text-left relative">
+    <div className="border flex flex-col justify-between bg-white/10 backdrop-blur-lg rounded-xl h-96 w-96 p-6 hover:shadow-emerald-300 shadow-md text-white transition">
+
       {
         isPopular && (
           <div className="absolute top-0 right-0 bg-gray-900 text-white px-2 py-1 rounded-bl-lg rounded-tr-lg">

@@ -21,7 +21,7 @@ import  Link from "next/link";
     return (
         <DropdownMenu open={open} onOpenChange={toggleMenu}>
             <DropdownMenuTrigger asChild>
-            <Button onClick={toggleMenu} className="mr-4" variant="secondary">{
+            <Button onClick={toggleMenu} className="bg-transparent dark:bg-transparent mr-4" variant="secondary">{
              open ? <X className="h-6 w-6 "/> : <AlignJustify className="h-6 w-6 "/>
     }
             </Button>

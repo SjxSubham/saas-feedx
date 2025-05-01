@@ -32,7 +32,7 @@ const ProjectList = (props: Props) =>{
                         </Card>
                     </li>
                 ))}
-                <Card className="max-w-[350px] mt-4 py-2 hover:shadow-indigo-300 drop-shadow-2xl flex flex-col h-full bg-gray-300">
+                <Card className="max-w-[350px] mt-1 py-0 hover:shadow-indigo-300 drop-shadow-2xl flex flex-col h-full bg-gray-300">
                     <CardHeader className="flex-1">
                         <CardTitle className="flex flex-row text-sm md:text-lg justify-center">
                             <Lock size={10} className="h-4 w-4 md:h-8 md:w-8 mr-2"/>

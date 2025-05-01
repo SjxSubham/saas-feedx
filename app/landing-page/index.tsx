@@ -11,9 +11,11 @@ const LandingPage = () => {
       
       <PricingSection />
      
-      
+      <div className='rounded-2xl'>
+
+
       <Footer />
-      
+      </div>      
     </div>
   );
 }

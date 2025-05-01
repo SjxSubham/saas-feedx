@@ -33,7 +33,7 @@ const PageHeader = () => {
                                         alt="FeedX Logo" 
                                         width={90} 
                                         height={70}
-                                        className="object-contain"
+                                        className="object-contain dark:bg-white/50 rounded-lg"
                                         priority
                                     />
                                 
@@ -50,9 +50,9 @@ const PageHeader = () => {
                             </SignUpButton>
                         </SignedOut>
                         <SignedIn>
-                            {/* <div className='flex '>
+                            <div className='flex '>
                             <ThemeToggleButton/> 
-                            </div> */}
+                            </div>
                             <HeaderMenu />
                             <UserButton />
                         </SignedIn>

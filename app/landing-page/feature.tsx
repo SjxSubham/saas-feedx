@@ -19,7 +19,7 @@ const Feature = ({ title, description }: { title: string; description: string })
 
   return (
     <motion.div
-      className="p-5 border hover:shadow-emerald-200 rounded-lg shadow-lg bg-white"
+      className="p-5 border hover:shadow-emerald-200 rounded-lg shadow-lg rounded-t-3xl bg-white"
       onMouseMove={handleMouseMove}
       onMouseLeave={() => {
         setRotateX(0);
