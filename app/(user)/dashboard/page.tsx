@@ -23,7 +23,7 @@ export default async function Page(){
     return (
        <div>
         <div className="flex items-center justify-center gap-3">
-        <h1 className="text-3xl font-bold text-center my-4 ">Your Projects List</h1>
+        <h1 className="text-3xl text-gray-200 font-bold text-center my-4 ">Your Projects List</h1>
         {/* {userProjects.length < maxFreeProjects && (
             <p className="text-gray-400">You can only add: {maxFreeProjects - userProjects.length}</p>
         )} */}
