@@ -474,7 +474,7 @@ function Table(props: { data: Feedback[] }) {
       <div className="w-full dark:text-black lg:w-3/4">
         <MyTable data={props.data} />
       </div>
-      <div className="w-full lg:w-1/4 bg-white p-4 shadow-2xl rounded-lg right-4 top-16 h-screen flex flex-col fixed gap-4 backdrop-blur-md overflow-y-auto">
+      <div className="w-full lg:w-1/4 bg-white custom-scrollbar p-4 shadow-2xl rounded-lg right-4 top-16 h-screen flex flex-col fixed gap-4 backdrop-blur-md overflow-y-auto">
       <h1 className="text-xl flex gap-2 dark:text-black font-bold">Analytics<ChartNoAxesCombined /></h1>
         <h2 className="text-lg font-semibold dark:text-gray-700 mb-2">Feedback Summary</h2>
         <Pie
