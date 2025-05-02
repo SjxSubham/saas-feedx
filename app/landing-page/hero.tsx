@@ -188,7 +188,7 @@ const Hero = () => {
           <div className="flex flex-wrap gap-4">
             <SignedOut>
               <SignUpButton>
-                <Button className="bg-emerald-600 hover:bg-emerald-500 shadow-lg">
+                <Button className="bg-gray-700 dark:hover:bg-violet-600 dark:bg-violet-500 dark:text-gray-200 hover:bg-emerald-500 shadow-2xl hover:shadow-gray-500">
                   <LogIn className="w-4 h-4 mr-2" />
                   Get Started
                 </Button>
