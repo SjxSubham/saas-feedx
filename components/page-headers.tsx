@@ -36,7 +36,6 @@ const PageHeader = () => {
                                         className="object-contain dark:bg-gradient-to-r from-sky-300 to-cyan-600 rounded-full bg-blend-overlay"
                                         priority
                                     />
-                                
                             </div>
                         )}
                     </Link>
