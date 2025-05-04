@@ -73,7 +73,7 @@ const FeaturesSection = () => {
       viewport={{ once: true }}
     >
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-extrabold">Features</h2>
+        <h2 className="text-3xl font-serif font-extrabold">Features</h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {features.map((feature, index) => (
