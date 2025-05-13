@@ -35,7 +35,7 @@ export default function NetworkStatusToast() {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, []);
+  }, []); // Add dependency array to ensure the effect runs only once
 
-  return null; // this component doesn't render anything itself
+  return null; // This component does not render anything visible
 }
