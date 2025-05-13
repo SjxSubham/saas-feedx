@@ -8,6 +8,7 @@ import {
 import './globals.css'
 import PageHeader from '@/components/page-headers'
 import { ThemeProvider } from '@/components/ThemeContext';
+import { Toaster } from 'react-hot-toast';
 
 
 export default function RootLayout({
@@ -22,6 +23,7 @@ export default function RootLayout({
 <body>
 {/* <Script id="feedx-widget" src='https://feed-x-widget.vercel.app/widget.umd.js'>
 </Script> */}
+<Toaster position="top-center" />
           <ThemeProvider>
           <PageHeader/>
           
