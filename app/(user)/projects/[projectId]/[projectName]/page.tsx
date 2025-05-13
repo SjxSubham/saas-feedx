@@ -9,16 +9,17 @@ import { Button } from "@/components/ui/button";
 
 const Page = async ({ params }: {
     params: {
-        projectId: string
+        projectId: string;
+        projectName: string;
 
     }
 }) => {
     if (!params.projectId) return (<div>Invalid Project ID</div>);
     const projects = await db.query.projects.findMany({
-        where: (eq(dbProjects.id, parseInt(params.projectId))),
+        where: (eq(dbProjects.id, parseInt(params.projectId)) && eq(dbProjects.name, params.projectName)),
         with: {
             feedbacks: true,
-        }
+        },
     });
 
     const project = projects[0];
@@ -40,7 +41,7 @@ const Page = async ({ params }: {
                     </div>
                     <div className="flex flex-col">
                         {project.url ? <Link href={project.url} className="underline text-indigo-200 flex items-center p-4"><Globe className="h-5 w-5 mr-1" /><span className="text-lg">Visit Site</span></Link> : null}
-                        <Link href={`/projects/${params.projectId}/instructions`} className="underline text-indigo-200 flex items-center mt-2 px-2">
+                        <Link href={`/projects/${params.projectId}/${params.projectName}/instructions`} className="underline text-indigo-200 flex items-center mt-2 px-2">
                             <Code className="h-5 w-5 mr-1" /><span className="text-lg">Share Link / Embed Code</span></Link></div>
                 </div>
             </div>
