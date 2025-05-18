@@ -36,8 +36,8 @@ const Page = async ({ params }: {
             <div className="flex justify-between items-start">
                 <div className="proj-info">
                     <div >
-                        <h1 className="text-3xl font-bold mb-3 px-5">{project.name}</h1>
-                        <h2 className="text-primary-background font-mono text-xl py-1 px-5">{project.description}</h2>
+                        <h1 className="text-3xl text-white font-bold mb-3 px-5">{project.name}</h1>
+                        <h2 className="text-primary-background text-white font-mono text-xl py-1 px-5">{project.description}</h2>
                     </div>
                     <div className="flex flex-col">
                         {project.url ? <Link href={project.url} className="underline text-indigo-200 flex items-center p-4"><Globe className="h-5 w-5 mr-1" /><span className="text-lg">Visit Site</span></Link> : null}

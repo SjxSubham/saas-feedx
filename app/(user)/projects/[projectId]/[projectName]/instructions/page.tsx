@@ -43,7 +43,7 @@ const project = projects[0];
         </Link>
       </div>
 
-      <h1 className="text-xl font-bold mb-2">Start Collecting Feedback</h1>
+      <h1 className="text-xl text-white font-bold mb-2">Start Collecting Feedback</h1>
 
       <div className="bg-gray-300 p-6 rounded-md mt-6 relative">
         <h1 className="text-2xl font-semibold font-mono text-secondary-foreground">
