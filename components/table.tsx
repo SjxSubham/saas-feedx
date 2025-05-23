@@ -474,7 +474,7 @@ function Table(props: { data: Feedback[]}) {
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 p-2 md:p-4 dark:bg-transparent relative">
-      <div className="w-full dark:text-black lg:w-3/4">
+      <div className="w-full dark:text-black dark lg:w-3/4">
        {/* Mobile Analytics Toggle Button */}
        <button 
         onClick={() => setShowAnalytics(!showAnalytics)}
@@ -486,7 +486,7 @@ function Table(props: { data: Feedback[]}) {
         <MyTable data={props.data} />
         </div>
       </div>
-      <div className={`w-full lg:w-1/4 bg-white lg:fixed lg:right-4 lg:top-16 lg:h-[calc(100vh-4rem)] p-4 shadow-lg rounded-lg lg:flex flex-col gap-4 overflow-y-auto backdrop-blur-md transition-all duration-300
+      <div className={`w-full lg:w-1/4 bg-white dark:bg-gray-100 lg:fixed lg:right-4 lg:top-16 lg:h-[calc(100vh-4rem)] p-4 shadow-lg rounded-lg lg:flex flex-col gap-4 overflow-y-auto backdrop-blur-md transition-all duration-300
         ${showAnalytics ? 'fixed inset-0 z-40' : 'hidden lg:block'}`}>
       
         {/* Close button for mobile */}
@@ -724,7 +724,7 @@ function MyTable({ data }: { data: Feedback[] }) {
   return (
     <div className="p-1 bg-slate-300 shadow-2xl rounded-lg overflow-x-auto">
       <div className="">
-      <table className="w-full">
+      <table className="w-fit">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id} className="border-b border-gray-400">
@@ -750,10 +750,10 @@ function MyTable({ data }: { data: Feedback[] }) {
       </table>
       </div>
       {/* Pagination */}
-      <div className="h-2 flex flex-col sm:flex-row items-center justify-between " />
+      <div className="h-4 flex flex-row sm:flex-row items-center justify-between " />
        <div className="flex items-center gap-2">
          <button
-          className="border rounded p-1 bg-gray-400 cursor-pointer "
+          className="border  rounded p-1 bg-gray-400 cursor-pointer "
           onClick={() => table.firstPage()}
           disabled={!table.getCanPreviousPage()}
         >

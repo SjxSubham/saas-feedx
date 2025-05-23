@@ -120,6 +120,13 @@ body {
   animation: gradientShift 10s ease infinite;
   border-radius: 1rem;
 }
+body.dark {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(175deg, #200743, #290441, #230541);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  border-radius: 1rem;
+}
 
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
