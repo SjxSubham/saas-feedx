@@ -33,7 +33,7 @@ const PageHeader = () => {
                                         alt="FeedX Logo" 
                                         width={100} 
                                         height={90}
-                                        className="object-contain dark:bg-gradient-to-r from-sky-300 to-cyan-600 rounded-full bg-blend-overlay"
+                                        className="object-contain  dark:bg-gradient-to-r from-purple-100  to-purple-100 rounded-xl "
                                         priority
                                     />
                             </div>

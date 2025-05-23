@@ -482,7 +482,7 @@ function Table(props: { data: Feedback[]}) {
       >
         <ChartNoAxesCombined />
       </button>
-      <div className="w-full lg:w-4/5">
+      <div className="lg:w-4/5">
         <MyTable data={props.data} />
         </div>
       </div>
@@ -493,7 +493,7 @@ function Table(props: { data: Feedback[]}) {
         {showAnalytics && (
           <button 
             onClick={() => setShowAnalytics(false)}
-            className="lg:hidden absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            className="lg:hidden absolute top-4 right-4 text-gray-900 font-bold hover:text-gray-700"
           >
             ✕
           </button>
@@ -722,7 +722,7 @@ function MyTable({ data }: { data: Feedback[] }) {
   });
 
   return (
-    <div className="p-4 bg-slate-300 shadow-2xl rounded-lg overflow-x-auto">
+    <div className="p-1 bg-slate-300 shadow-2xl rounded-lg overflow-x-auto">
       <div className="">
       <table className="w-full">
         <thead>
@@ -740,7 +740,7 @@ function MyTable({ data }: { data: Feedback[] }) {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className="bg-gray-300 dark:border-separate rounded-3xl ">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="font-serif text-justify animate-custom-bounce p-2">
+                <td key={cell.id} className="font-serif text-justify animate-custom-bounce p-3">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

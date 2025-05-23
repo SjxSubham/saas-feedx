@@ -40,12 +40,12 @@ const Page = async ({ params }: {
                         <h2 className="text-primary-background text-white font-mono text-xl py-1 px-5">{project.description}</h2>
                     </div>
                     <div className="flex flex-col">
-                        {project.url ? <Link href={project.url} className="underline text-indigo-200 flex items-center p-4"><Globe className="h-5 w-5 mr-1" /><span className="text-lg">Visit Site</span></Link> : null}
-                        <Link href={`/projects/${params.projectId}/${params.projectName}/instructions`} className="underline text-indigo-200 flex items-center mt-2 px-2">
-                            <Code className="h-5 w-5 mr-1" /><span className="text-lg">Share Link / Embed Code</span></Link></div>
+                        {project.url ? <Link href={project.url} className="rounded-lg w-fit bg-gradient-to-r from-purple-600 to-blue-500 dark:text-blue-100 text-white flex items-center p-2 gap-1 mb-2 mt-4"><Globe className="h-5 w-5 mr-1" /><span className="text-md">Visit Site</span></Link> : null}
+                        <Link href={`/projects/${params.projectId}/${params.projectName}/instructions`} className="w-fit rounded-lg bg-gradient-to-r from-purple-600 to-blue-500 dark:text-blue-100 text-white p-2 gap-1 mb-2 flex items-center mt-2 px-2">
+                            <Code className="h-5 w-5 mr-1" /><span className="text-md">Share Link / Embed Code</span></Link></div>
                 </div>
             </div>
-            <div >
+            <div className="-m-4 mt-2 bg-transparent rounded-2xl shadow-2xl lg:w-[1300px] md:w-[700px] overflow-x-auto" >
                 <Table data={project.feedbacks} />
             </div>
         </div>
