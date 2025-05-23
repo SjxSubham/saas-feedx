@@ -463,6 +463,7 @@ import "chart.js/auto";
 type Feedback = InferSelectModel<typeof feedbacks>;
 
 function Table(props: { data: Feedback[] }) {
+  const [showAnalytics, setShowAnalytics] = useState(false);
   const positiveFeedback = props.data.filter((f) => f.rating !== null && f.rating >= 4).length;
   const negativeFeedback = props.data.filter((f) => f.rating !== null && f.rating <= 2).length;
   const neutralFeedback = props.data.length - (positiveFeedback + negativeFeedback);
@@ -470,13 +471,36 @@ function Table(props: { data: Feedback[] }) {
   const labels = props.data.map((_, index) => `Feedback ${index + 1}`);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 p-4 dark:bg-transparent relative">
+    <div className="flex flex-col lg:flex-row gap-8 p-2 md:p-4 dark:bg-transparent relative">
       <div className="w-full dark:text-black lg:w-3/4">
+       {/* Mobile Analytics Toggle Button */}
+       <button 
+        onClick={() => setShowAnalytics(!showAnalytics)}
+        className="lg:hidden fixed bottom-4 right-4 z-50 bg-indigo-500 text-white p-3 rounded-full shadow-lg"
+      >
+        <ChartNoAxesCombined />
+      </button>
+      <div className="w-full lg:w-4/5">
         <MyTable data={props.data} />
+        </div>
       </div>
-      <div className="w-full lg:w-1/4 bg-white fixed custom-scrollbar p-4 shadow-2xl rounded-lg right-4 top-16 h-screen flex flex-col  gap-4 backdrop-blur-md overflow-y-auto">
+      <div className={`w-full lg:w-1/4 bg-white lg:fixed lg:right-4 lg:top-16 lg:h-[calc(100vh-4rem)] p-4 shadow-lg rounded-lg lg:flex flex-col gap-4 overflow-y-auto backdrop-blur-md transition-all duration-300
+        ${showAnalytics ? 'fixed inset-0 z-40' : 'hidden lg:block'}`}>
+      
+        {/* Close button for mobile */}
+        {showAnalytics && (
+          <button 
+            onClick={() => setShowAnalytics(false)}
+            className="lg:hidden absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          >
+            ✕
+          </button>
+        )}
+      
+      
       <h1 className="text-xl flex gap-2 dark:text-black font-bold">Analytics<ChartNoAxesCombined /></h1>
-        <h2 className="text-lg font-semibold dark:text-gray-700 mb-2">Feedback Summary</h2>
+        <h2 className="text-lg font-semibold dark:text-gray-700 mb-1">Feedback Summary</h2>
+        <div className="p-1" >
         <Pie
           data={{
             labels: ["Positive", "Neutral", "Negative"],
@@ -518,6 +542,9 @@ function Table(props: { data: Feedback[] }) {
             },
           }}
         />
+        <div>
+            <h2 className="text-lg font-semibold dark:text-gray-800 mt-6 mb-2">Rating Distribution</h2>
+            <div className="h-64 md:h-80">
         <Bar
           data={{
             labels: ["1 Star", "2 Stars", "3 Stars", "4 Stars", "5 Stars"],
@@ -565,7 +592,11 @@ function Table(props: { data: Feedback[] }) {
               },
             },
           }}
+          
         />
+       <div>
+        <h2 className="text-lg font-semibold dark:text-gray-800 mt-6 mb-2">Feedback Over Time</h2>
+        <div className="h-64 md:h-80 ">
         <Line
           data={{
             labels: labels,
@@ -613,8 +644,12 @@ function Table(props: { data: Feedback[] }) {
             },
           }}
         />
-        
-
+        </div>
+       
+        </div>
+        </div>
+        </div>
+        </div>
       </div>
     </div>
   );
@@ -659,13 +694,14 @@ function MyTable({ data }: { data: Feedback[] }) {
   });
 
   return (
-    <div className="p-4 bg-slate-300 shadow-2xl rounded-lg">
+    <div className="p-4 bg-slate-300 shadow-2xl rounded-lg overflow-x-auto">
+      <div className="">
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id} className="border-dotted">
+            <tr key={headerGroup.id} className="border-b border-gray-400">
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="p-3 text-center">
+                <th key={header.id} className="p-2 md:p-3 text-center">
                   {flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
@@ -676,7 +712,7 @@ function MyTable({ data }: { data: Feedback[] }) {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className="bg-gray-300 dark:border-separate rounded-3xl ">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="font-serif text-justify animate-custom-bounce p-3">
+                <td key={cell.id} className="font-serif text-justify animate-custom-bounce p-2">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -684,17 +720,19 @@ function MyTable({ data }: { data: Feedback[] }) {
           ))}
         </tbody>
       </table>
-      <div className="h-2" />
+      </div>
+      {/* Pagination */}
+      <div className="h-2 flex flex-col sm:flex-row items-center justify-between " />
        <div className="flex items-center gap-2">
          <button
-          className="border rounded p-1 bg-gray-400 cursor-pointer"
+          className="border rounded p-1 bg-gray-400 cursor-pointer "
           onClick={() => table.firstPage()}
           disabled={!table.getCanPreviousPage()}
         >
           <ChevronsLeft/>
         </button>
         <button
-          className="border rounded p-1 bg-gray-400 cursor-pointer"
+          className="border rounded p-1 bg-gray-400 cursor-pointer "
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
@@ -709,14 +747,16 @@ function MyTable({ data }: { data: Feedback[] }) {
           <ChevronRight/>
         </button>
         <button
-          className="border rounded p-1 bg-gray-400 cursor-pointer"
+          className="border rounded p-1 bg-gray-400 cursor-pointer "
           onClick={() => table.lastPage()}
           disabled={!table.getCanNextPage()}
         >
           <ChevronsRight/>
         </button>
+        </div>
+        <div className="flex items-center gap-2 text-sm">
         <span className="flex font-mono items-center bg-gray-300 gap-1">
-          | Go to page:
+          | Go to page: </span>
           <input 
             type="number"
             min="1"
@@ -728,7 +768,7 @@ function MyTable({ data }: { data: Feedback[] }) {
             }}
             className="border p-1 rounded w-16 bg-gray-400"
           />
-        </span>
+         <span>of {table.getPageCount()}</span>
         <select className="text-mono rounded-lg bg-gray-300"
           value={table.getState().pagination.pageSize}
           onChange={e => {

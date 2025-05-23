@@ -26,7 +26,7 @@ const Page = async ({ params }: {
 
     return (
         <div>
-            <div className="flex py-3 ">
+            <div className="relative flex py-3 ">
                 <Link href="/dashboard">
                     <Button className="bg-indigo-400 flex items-center mb-2 w-fit hover:bg-indigo-500">
                         <ChevronLeft className="h-5 w-5 mr-1" /><span className="text-lg">Back to all Projects</span>
