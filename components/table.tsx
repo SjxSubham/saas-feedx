@@ -460,15 +460,17 @@ import { feedbacks } from "@/db/schema";
 
 import "chart.js/auto";
 
-type Feedback = InferSelectModel<typeof feedbacks>;
 
-function Table(props: { data: Feedback[] }) {
+type Feedback = InferSelectModel<typeof feedbacks>;
+type user = InferSelectModel<typeof feedbacks>;
+
+function Table(props: { data: Feedback[]}) {
   const [showAnalytics, setShowAnalytics] = useState(false);
   const positiveFeedback = props.data.filter((f) => f.rating !== null && f.rating >= 4).length;
   const negativeFeedback = props.data.filter((f) => f.rating !== null && f.rating <= 2).length;
   const neutralFeedback = props.data.length - (positiveFeedback + negativeFeedback);
 
-  const labels = props.data.map((_, index) => `Feedback ${index + 1}`);
+  const labels = props.data.map((_, index) => ` ${index + 1}. `);
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 p-2 md:p-4 dark:bg-transparent relative">
@@ -562,7 +564,8 @@ function Table(props: { data: Feedback[] }) {
                 borderColor: "#ffffff",
                 borderWidth: 5,
                 hoverBackgroundColor: "#1E40AF",
-                hoverBorderWidth: 3,
+                hoverBorderWidth: 4,
+                
               },
             ],
           }}
@@ -585,10 +588,16 @@ function Table(props: { data: Feedback[] }) {
                 bodyColor: "#fff",
                 titleColor: "#fff",
                 bodyFont: {
-                  size: 14,
+                  size: 12,
                 },
-                padding: 10,
-                cornerRadius: 5,
+                padding: 8,
+                cornerRadius: 3,
+                animations: {
+                  tooltip: {
+                    duration: 400,
+                    easing: "easeInOutQuad",
+                  },
+                },
               },
             },
           }}
@@ -602,18 +611,18 @@ function Table(props: { data: Feedback[] }) {
             labels: labels,
             datasets: [
               {
-                label: "Feedback Over User",
-                data: props.data.map((f) => f.rating),
-                borderColor: "#EC4899",
-                backgroundColor: "rgba(236, 72, 153, 0.2)",
-                fill: true,
-                pointBackgroundColor: "#9333EA",
-                pointBorderColor: "#FFFFFF",
-                pointHoverBackgroundColor: "#FBBF24",
-                pointHoverBorderColor: "#F59E0B",
-                hoverBorderWidth: 3,
-                hoverBorderColor: "#DC2626",
-                hoverBackgroundColor: "#FFB703",
+          label: "Feedback Over User",
+          data: props.data.map((f) => f.rating),
+          borderColor: "#EC4899",
+          backgroundColor: "rgba(236, 72, 153, 0.2)",
+          fill: true,
+          pointBackgroundColor: props.data.map(() => getRandomColor()),
+          pointBorderColor: "#FFFFFF",
+          pointHoverBackgroundColor: "#FF0000",
+          pointHoverBorderColor: "#F59E0B",
+          hoverBorderWidth: 3,
+          hoverBorderColor: "#DC2626",
+          hoverBackgroundColor: "#FFB703",
               },
             ],
           }}
@@ -621,25 +630,35 @@ function Table(props: { data: Feedback[] }) {
             responsive: true,
             plugins: {
               legend: {
-                position: "top",
-                labels: {
-                  font: {
-                    size: 14,
-                    weight: "bold",
-                  },
-                  padding: 20,
-                  color: "#333",
-                },
+          position: "top",
+          labels: {
+            font: {
+              size: 14,
+              weight: "bold",
+            },
+            padding: 20,
+            color: "#333",
+          },
               },
               tooltip: {
-                backgroundColor: "rgba(0,0,0,0.8)",
-                bodyColor: "#fff",
-                titleColor: "#fff",
-                bodyFont: {
-                  size: 12,
-                },
-                padding: 10,
-                cornerRadius: 5,
+          callbacks: {
+            label: function (context) {
+              const index = context.dataIndex;
+              const feedback = props.data[index];
+              return `${feedback.userName || "N/A"}`;
+            },
+          },
+          backgroundColor: "rgba(0,0,0,0.8)",
+          bodyColor: "#fff",
+          titleColor: "#fff",
+          animation: {
+            duration: 500,
+          },
+          bodyFont: {
+            size: 12,
+          },
+          padding: 5,
+          cornerRadius: 5,
               },
             },
           }}
@@ -653,6 +672,15 @@ function Table(props: { data: Feedback[] }) {
       </div>
     </div>
   );
+}
+
+function getRandomColor() {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
 function MyTable({ data }: { data: Feedback[] }) {
