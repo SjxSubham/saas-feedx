@@ -1,50 +1,60 @@
 import { InferSelectModel } from "drizzle-orm";
-import {projects} from "@/db/schema";
-import {Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter} from "@/components/ui/card";
+import { projects } from "@/db/schema";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardDescription,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import SubsribeBtn from "../payments/subscribe-btn";
-import {monthlyPlanId} from "@/lib/payments";
-import {Lock} from "lucide-react"
+import { monthlyPlanId } from "@/lib/payments";
+import { Lock } from "lucide-react";
 
 type Project = InferSelectModel<typeof projects>;
 type Props = {
-    projects: Project[];
-}
+  projects: Project[];
+};
 
-const ProjectList = (props: Props) =>{
-    return (
-        <div>
-            <ul className="grid grid-cols-1 md:grid-cols-3 m-5 p-4 gap-4">
-                {props.projects.map((project: Project) => (
-                    <li key={project.id}>
-                        <Card className="max-w-[350px] flex flex-col h-full hover:shadow-cyan-200 shadow-lg">
-                            <CardHeader className="flex-1">
-                                <CardTitle>{project.name}</CardTitle>
-                                <CardDescription>{project.description}</CardDescription>
-                            </CardHeader>
-                            <Link href={`/projects/${project.id}/${project.name}`}>
-                            <Button className="from-indigo-950 via-cyan-700 to-cyan-500 bg-gradient-to-r justify-center hover:shadow-gray-300 text-white shadow-md ">View Project</Button>
-                            </Link>
-                            <CardFooter>
-
-                            </CardFooter>
-                        </Card>
-                    </li>
-                ))}
-                <Card className="max-w-[350px] mt-1 py-0 hover:shadow-indigo-300 drop-shadow-2xl flex flex-col h-full bg-gray-300">
-                    <CardHeader className="flex-1">
-                        <CardTitle className="flex flex-row text-sm dark:text-black md:text-lg justify-center">
-                            <Lock size={10} className="h-4 w-4 md:h-8 md:w-8 mr-2"/>
-                            <span> Upgrade to Premium</span></CardTitle>
-                        <CardDescription className="mt-3 flex flex-3 justify-center">Unlock unlimited Projects</CardDescription>
-                        </CardHeader>
-                <div className="w-fit mx-auto mb-4">
-                <SubsribeBtn price={monthlyPlanId} />
-                </div>
-                </Card>
-            </ul>
-        </div>
-    )
-}
+const ProjectList = (props: Props) => {
+  return (
+    <div>
+      <ul className="grid grid-cols-1 md:grid-cols-3 m-5 p-4 gap-4">
+        {props.projects.map((project: Project) => (
+          <li key={project.id}>
+            <Card className="max-w-[350px] flex flex-col h-full hover:shadow-cyan-200 shadow-lg">
+              <CardHeader className="flex-1">
+                <CardTitle>{project.name}</CardTitle>
+                <CardDescription>{project.description}</CardDescription>
+              </CardHeader>
+              <Link href={`/projects/${project.id}/${project.name}`}>
+                <Button variant="accent" className="w-full justify-center">
+                  View Project
+                </Button>
+              </Link>
+              <CardFooter></CardFooter>
+            </Card>
+          </li>
+        ))}
+        <Card className="max-w-[350px] mt-1 py-0 hover:shadow-indigo-300 drop-shadow-2xl flex flex-col h-full bg-gray-300">
+          <CardHeader className="flex-1">
+            <CardTitle className="flex flex-row text-sm dark:text-black md:text-lg justify-center">
+              <Lock size={10} className="h-4 w-4 md:h-8 md:w-8 mr-2" />
+              <span> Upgrade to Premium</span>
+            </CardTitle>
+            <CardDescription className="mt-3 flex flex-3 justify-center">
+              Unlock unlimited Projects
+            </CardDescription>
+          </CardHeader>
+          <div className="w-fit mx-auto mb-4">
+            <SubsribeBtn price={monthlyPlanId} />
+          </div>
+        </Card>
+      </ul>
+    </div>
+  );
+};
 export default ProjectList;

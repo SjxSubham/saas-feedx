@@ -8,42 +8,45 @@ import Link from "next/link";
 import { projects as dbProjects } from "@/db/schema";
 import { parseArgs } from "util";
 
-const Page = async ({ params }: { 
-  params: { 
+const Page = async ({
+  params,
+}: {
+  params: {
     projectId: string;
     projectName: string;
-  } 
+  };
 }) => {
-  
   if (!params.projectId) return <div>Invalid Project ID</div>;
   if (!params.projectName) return <div>Invalid Project Name</div>;
   if (!process.env.WIDGET_URL) return <div>Missing WIDGET_URL</div>;
 
   const projects = await db.query.projects.findMany({
-    where: (eq(dbProjects.name, params.projectName) && eq(dbProjects.id, parseInt(params.projectId))),
+    where:
+      eq(dbProjects.name, params.projectName) &&
+      eq(dbProjects.id, parseInt(params.projectId)),
     with: {
-        feedbacks: true,
-    }
-});
+      feedbacks: true,
+    },
+  });
 
-const project = projects[0];
-
-
+  const project = projects[0];
 
   const widgetUrl = `https://feed-x-widget.vercel.app/?projectId=${params.projectId}&projectName=${params.projectName}`; // i'M Pass projectId dynamically HERE
 
   return (
     <div>
-      <div className="flex py-4">
+      <div className="flex gap-2 flex-shrink-0 items-center">
         <Link href={`/projects/${params.projectId}/${project.name}`}>
-          <Button className="bg-indigo-400 flex items-center mb-2 w-fit hover:bg-indigo-500">
+          <Button variant="accent" className="flex items-center mb-2 w-fit">
             <CornerUpLeft className="h-5 w-5 mr-1" />
             <span className="text-lg">Return To Project</span>
           </Button>
         </Link>
       </div>
 
-      <h1 className="text-xl text-white font-bold mb-2">Start Collecting Feedback</h1>
+      <h1 className="text-xl text-white font-bold mb-2">
+        Start Collecting Feedback
+      </h1>
 
       <div className="bg-gray-300 p-6 rounded-md mt-6 relative">
         <h1 className="text-2xl font-semibold font-mono text-secondary-foreground">
@@ -55,18 +58,25 @@ const project = projects[0];
         <h3 className="text-xl font-mono text-center font-bold py-4 bg-gradient-to-r from-gray-400 via-gray-700 to-gray-950 text-transparent bg-clip-text">
           Your Project-NAME: {params.projectName}
         </h3>
-        <div className="flex justify-center w-full">
+        <div className="flex flex-col lg:flex-row items-center gap-3 justify-center w-full">
           <Link href={widgetUrl} target="_blank">
-            <Button className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% flex items-center mb-3 w-fit">
+            <Button
+              variant="accent"
+              className="flex items-center mb-3 w-full lg:w-auto justify-center"
+            >
               <Share2 className="h-5 w-5 mr-1" />
               <span className="text-lg">Share Link</span>
             </Button>
           </Link>
-          <CopyBtn text={widgetUrl} />
+          <div className="flex-shrink-0">
+            <CopyBtn text={widgetUrl} />
+          </div>
         </div>
       </div>
 
-      <h3 className="font-extrabold text-gray-400 text-center py-5">---OR---</h3>
+      <h3 className="font-extrabold text-gray-400 text-center py-5">
+        ---OR---
+      </h3>
       <div className="bg-gray-400 p-6 rounded-md mt-6 relative">
         <p className="text-lg font-semibold font-mono text-secondary-foreground">
           Embed the code in your site

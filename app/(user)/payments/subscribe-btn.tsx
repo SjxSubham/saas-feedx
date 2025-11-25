@@ -1,47 +1,56 @@
 "use client";
-import {Button} from "@/components/ui/button"
-import {useState} from "react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { getStripe } from "@/lib/stripe.client";
-import {useRouter} from "next/navigation";
-import { Loader2} from "lucide-react";
-
+import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 type Props = {
-    price: string;
-}
-const SubsribeBtn = ({price}: Props) => {
-    const router = useRouter();
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
+  price: string;
+};
+const SubsribeBtn = ({ price }: Props) => {
+  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-    const handleCheckout = async(price: string) => {
-        setLoading(true);
-        try {
-            const {sessionId} = await fetch("/api/stripe/checkout-session", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({price}),
-            }
-            ).then((res) => res.json());
+  const handleCheckout = async (price: string) => {
+    setLoading(true);
+    try {
+      const { sessionId } = await fetch("/api/stripe/checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ price }),
+      }).then((res) => res.json());
 
-            const stripe = await getStripe();
-            if (stripe) {
-                stripe.redirectToCheckout({sessionId});
-            }
-        }
-        catch (error){
-            console.error(error);
-        }
-        setLoading(false);
+      const stripe = await getStripe();
+      if (stripe) {
+        stripe.redirectToCheckout({ sessionId });
+      }
+    } catch (error) {
+      console.error(error);
     }
-    if(error){
-        return <p>{error}</p>
-    }
-    return (
-        <Button className="bg-indigo-400" onClick={() => handleCheckout(price)} disabled={loading}>{loading ? <>
-        <Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please Wait</> :"Subscribe"}</Button>
-    )
-}
+    setLoading(false);
+  };
+  if (error) {
+    return <p>{error}</p>;
+  }
+  return (
+    <Button
+      variant="accent"
+      onClick={() => handleCheckout(price)}
+      disabled={loading}
+    >
+      {loading ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Please Wait
+        </>
+      ) : (
+        "Subscribe"
+      )}
+    </Button>
+  );
+};
 export default SubsribeBtn;
