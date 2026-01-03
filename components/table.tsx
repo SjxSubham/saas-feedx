@@ -23,7 +23,7 @@
 // type Feedback = InferSelectModel<typeof feedbacks>;
 
 // function Table(props: { data: Feedback[] }) {
-    
+
 
 //   const rerender = React.useReducer(() => ({}), {})[1]
 
@@ -57,13 +57,13 @@
 //         minSize: 200,
 //         maxSize: 600,
 //       },
-      
+
 //     ],
 //     []
 //   )
 
-  
-  
+
+
 
 //   return (
 //     <>
@@ -74,7 +74,7 @@
 //         }}
 //       />
 //       <hr />
-      
+
 //     </>
 //   )
 // }
@@ -181,7 +181,7 @@
 //           onClick={() => table.previousPage()}
 //           disabled={!table.getCanPreviousPage()}
 //         >
-          
+
 //           <ChevronLeft/>
 //         </button>
 //         <button
@@ -438,15 +438,12 @@
 "use client";
 
 import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
-import { ChevronRight, ChevronLeft, ChevronsRight, ChevronsLeft, ChartNoAxesCombined } from "lucide-react";
+import { ChevronRight, ChevronLeft, ChevronsRight, ChevronsLeft, ChartNoAxesCombined, X } from "lucide-react";
 import Ratings from "./ratings";
-import { Bar, Pie, Line, Scatter } from "react-chartjs-2";
+import { Bar, Pie, Line } from "react-chartjs-2";
 import {
-  Column,
   ColumnDef,
   PaginationState,
-  Table as TanstackTable,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -457,230 +454,163 @@ import {
 
 import { InferSelectModel } from "drizzle-orm";
 import { feedbacks } from "@/db/schema";
-
 import "chart.js/auto";
-
+import { Button } from "@/components/ui/button";
 
 type Feedback = InferSelectModel<typeof feedbacks>;
-type user = InferSelectModel<typeof feedbacks>;
 
-function Table(props: { data: Feedback[]}) {
+function Table(props: { data: Feedback[] }) {
   const [showAnalytics, setShowAnalytics] = useState(false);
   const positiveFeedback = props.data.filter((f) => f.rating !== null && f.rating >= 4).length;
   const negativeFeedback = props.data.filter((f) => f.rating !== null && f.rating <= 2).length;
   const neutralFeedback = props.data.length - (positiveFeedback + negativeFeedback);
 
-  const labels = props.data.map((_, index) => ` ${index + 1}. `);
+  const total = props.data.length;
+  const averageRating = total > 0
+    ? (props.data.reduce((acc, curr) => acc + (curr.rating || 0), 0) / total).toFixed(1)
+    : "0.0";
+  const sentimentScore = total > 0
+    ? Math.round(((positiveFeedback - negativeFeedback) / total) * 100)
+    : 0;
+
+  const downloadCSV = () => {
+    const headers = ["Name", "Email", "Rating", "Message"];
+    const csvContent = [
+      headers.join(","),
+      ...props.data.map(f => [
+        `"${f.userName || ''}"`,
+        `"${f.userEmail || ''}"`,
+        f.rating || 0,
+        `"${f.message?.replace(/"/g, '""') || ''}"`
+      ].join(","))
+    ].join("\n");
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "feedback_data.csv");
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 p-2 md:p-4 dark:bg-transparent relative">
-      <div className="w-full dark:text-black dark lg:w-3/4">
-       {/* Mobile Analytics Toggle Button */}
-       <button 
-        onClick={() => setShowAnalytics(!showAnalytics)}
-        className="lg:hidden fixed bottom-4 right-4 z-50 bg-indigo-500 text-white p-3 rounded-full shadow-lg"
-      >
-        <ChartNoAxesCombined />
-      </button>
-      <div className="lg:w-4/5">
-        <MyTable data={props.data} />
+    <div className="flex flex-col lg:flex-row gap-8 relative">
+      <div className="w-full lg:w-3/4">
+        {/* Mobile Analytics Toggle Button */}
+        <button
+          onClick={() => setShowAnalytics(!showAnalytics)}
+          className="lg:hidden fixed bottom-6 right-6 z-50 bg-primary text-primary-foreground p-4 rounded-full shadow-lg hover:scale-110 transition-transform"
+        >
+          <ChartNoAxesCombined className="w-6 h-6" />
+        </button>
+        <div className="w-full">
+          <MyTable data={props.data} />
         </div>
       </div>
-      <div className={`w-full lg:w-1/4 bg-white dark:bg-gray-100 lg:fixed lg:right-4 lg:top-16 lg:h-[calc(100vh-4rem)] p-4 shadow-lg rounded-lg lg:flex flex-col gap-4 overflow-y-auto backdrop-blur-md transition-all duration-300
-        ${showAnalytics ? 'fixed inset-0 z-40' : 'hidden lg:block'}`}>
-      
+
+      <div className={`w-full lg:w-1/4 fixed inset-y-0 right-0 z-40 bg-background/95 backdrop-blur-xl border-l border-white/10 p-6 shadow-2xl transition-transform duration-300 ease-in-out overflow-y-auto custom-scrollbar
+        ${showAnalytics ? 'translate-x-0' : 'translate-x-full lg:translate-x-0 lg:static lg:h-auto lg:bg-transparent lg:border-none lg:shadow-none lg:p-0 lg:overflow-visible'}`}>
+
         {/* Close button for mobile */}
-        {showAnalytics && (
-          <button 
-            onClick={() => setShowAnalytics(false)}
-            className="lg:hidden absolute top-4 right-4 text-gray-900 font-bold hover:text-gray-700"
-          >
-            ✕
-          </button>
-        )}
-      
-      
-      <h1 className="text-xl flex gap-2 dark:text-black font-bold">Analytics<ChartNoAxesCombined /></h1>
-        <h2 className="text-lg font-semibold dark:text-gray-700 mb-1">Feedback Summary</h2>
-        <div className="p-1" >
-        <Pie
-          data={{
-            labels: ["Positive", "Neutral", "Negative"],
-            datasets: [
-              {
-                data: [positiveFeedback, neutralFeedback, negativeFeedback],
-                backgroundColor: ["#34D399", "#60A5FA", "#F87171"],
-                borderColor: "#ffffff",
-                borderWidth: 2,
-                hoverOffset: 10,
-              
-              },
-            ],
-          }}
-          options={{
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "bottom",
-                labels: {
-                  font: {
-                    size: 14,
-                    weight: "bold",
+        <button
+          onClick={() => setShowAnalytics(false)}
+          className="lg:hidden absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+        >
+          <X className="w-6 h-6" />
+        </button>
+
+        <div className="space-y-6">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <ChartNoAxesCombined className="w-5 h-5 text-primary" />
+              <h1 className="text-xl font-bold tracking-tight glow-text text-foreground">Analytics</h1>
+            </div>
+            <Button size="sm" variant="outline" onClick={downloadCSV} className="h-8 text-xs neo-border">
+              Export CSV
+            </Button>
+          </div>
+
+          {/* Overview Cards */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="glass-panel p-4 rounded-xl flex flex-col justify-center items-center text-center">
+              <span className="text-3xl font-bold text-foreground">{total}</span>
+              <span className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Total</span>
+            </div>
+            <div className="glass-panel p-4 rounded-xl flex flex-col justify-center items-center text-center">
+              <span className="text-3xl font-bold text-primary">{averageRating}</span>
+              <span className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Avg Rating</span>
+            </div>
+            <div className="glass-panel p-4 rounded-xl col-span-2 flex flex-row justify-between items-center px-6">
+              <div className="text-left">
+                <span className="text-2xl font-bold text-foreground">{sentimentScore}%</span>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">Net Sentiment</p>
+              </div>
+              <div className={`h-2 w-20 rounded-full ${sentimentScore > 0 ? 'bg-gradient-to-r from-emerald-500 to-emerald-300' : 'bg-gradient-to-r from-red-500 to-red-300'}`} />
+            </div>
+          </div>
+
+          <div className="glass-panel p-5 rounded-xl">
+            <h2 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wider">Feedback Summary</h2>
+            <div className="p-2">
+              <Pie
+                data={{
+                  labels: ["Positive", "Neutral", "Negative"],
+                  datasets: [
+                    {
+                      data: [positiveFeedback, neutralFeedback, negativeFeedback],
+                      backgroundColor: ["#a3e635", "#60a5fa", "#f87171"], // Lime, Blue, Red
+                      borderColor: "transparent",
+                      hoverOffset: 10,
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: {
+                      position: "bottom",
+                      labels: { color: "#9ca3af", font: { size: 12 } },
+                    },
                   },
-                  padding: 15,
-                  color: "#333",
-                },
-              },
-              tooltip: {
-                backgroundColor: "rgba(0,0,0,0.8)",
-                bodyColor: "#fff",
-                titleColor: "#fff",
-                bodyFont: {
-                  size: 14,
-                },
-                padding: 10,
-                cornerRadius: 5,
-              },
-            },
-          }}
-        />
-        <div>
-            <h2 className="text-lg font-semibold dark:text-gray-800 mt-6 mb-2">Rating Distribution</h2>
-            <div className="h-64 md:h-80">
-        <Bar
-          data={{
-            labels: ["1 Star", "2 Stars", "3 Stars", "4 Stars", "5 Stars"],
-            datasets: [
-              {
-                label: "Number of Reviews",
-                data: [
-                  props.data.filter((f) => f.rating === 1).length,
-                  props.data.filter((f) => f.rating === 2).length,
-                  props.data.filter((f) => f.rating === 3).length,
-                  props.data.filter((f) => f.rating === 4).length,
-                  props.data.filter((f) => f.rating === 5).length,
-                ],
-                backgroundColor: ["#F59E0B", "#EF4444", "#6366F1", "#10B981", "#3B82F6"],
-                borderColor: "#ffffff",
-                borderWidth: 5,
-                hoverBackgroundColor: "#1E40AF",
-                hoverBorderWidth: 4,
-                
-              },
-            ],
-          }}
-          options={{
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "top",
-                labels: {
-                  font: {
-                    size: 14,
-                    weight: "bold",
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="glass-panel p-5 rounded-xl">
+            <h2 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wider">Rating Distribution</h2>
+            <div className="h-40">
+              <Bar
+                data={{
+                  labels: ["1★", "2★", "3★", "4★", "5★"],
+                  datasets: [
+                    {
+                      label: "Reviews",
+                      data: [1, 2, 3, 4, 5].map(r => props.data.filter(f => f.rating === r).length),
+                      backgroundColor: "#a3e635",
+                      borderRadius: 4,
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  scales: {
+                    x: { grid: { display: false }, ticks: { color: "#9ca3af" } },
+                    y: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#9ca3af" } },
                   },
-                  padding: 15,
-                  color: "#333",
-                },
-              },
-              tooltip: {
-                backgroundColor: "rgba(0,0,0,0.8)",
-                bodyColor: "#fff",
-                titleColor: "#fff",
-                bodyFont: {
-                  size: 12,
-                },
-                padding: 8,
-                cornerRadius: 3,
-                animations: {
-                  tooltip: {
-                    duration: 400,
-                    easing: "easeInOutQuad",
-                  },
-                },
-              },
-            },
-          }}
-          
-        />
-       <div>
-        <h2 className="text-lg font-semibold dark:text-gray-800 mt-6 mb-2">Feedback Over Time</h2>
-        <div className="h-64 md:h-80 ">
-        <Line
-          data={{
-            labels: labels,
-            datasets: [
-              {
-          label: "Feedback Over User",
-          data: props.data.map((f) => f.rating),
-          borderColor: "#EC4899",
-          backgroundColor: "rgba(236, 72, 153, 0.2)",
-          fill: true,
-          pointBackgroundColor: props.data.map(() => getRandomColor()),
-          pointBorderColor: "#FFFFFF",
-          pointHoverBackgroundColor: "#FF0000",
-          pointHoverBorderColor: "#F59E0B",
-          hoverBorderWidth: 3,
-          hoverBorderColor: "#DC2626",
-          hoverBackgroundColor: "#FFB703",
-              },
-            ],
-          }}
-          options={{
-            responsive: true,
-            plugins: {
-              legend: {
-          position: "top",
-          labels: {
-            font: {
-              size: 14,
-              weight: "bold",
-            },
-            padding: 20,
-            color: "#333",
-          },
-              },
-              tooltip: {
-          callbacks: {
-            label: function (context) {
-              const index = context.dataIndex;
-              const feedback = props.data[index];
-              return `${feedback.userName || "N/A"}`;
-            },
-          },
-          backgroundColor: "rgba(0,0,0,0.8)",
-          bodyColor: "#fff",
-          titleColor: "#fff",
-          animation: {
-            duration: 500,
-          },
-          bodyFont: {
-            size: 12,
-          },
-          padding: 5,
-          cornerRadius: 5,
-              },
-            },
-          }}
-        />
-        </div>
-       
-        </div>
-        </div>
-        </div>
+                  plugins: { legend: { display: false } }
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
-}
-
-function getRandomColor() {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
 }
 
 function MyTable({ data }: { data: Feedback[] }) {
@@ -692,21 +622,23 @@ function MyTable({ data }: { data: Feedback[] }) {
   const columns: ColumnDef<Feedback>[] = [
     {
       accessorKey: "userName",
-      header: "First Name",
+      header: "Name",
+      cell: info => <span className="font-medium text-foreground">{info.getValue() as string}</span>
     },
     {
       accessorKey: "userEmail",
       header: "Email",
+      cell: info => <span className="text-muted-foreground">{info.getValue() as string}</span>
     },
     {
       accessorKey: "rating",
       header: "Rating",
-      cell: ({ getValue }) => <Ratings rating={getValue() as number} count={5} />,
+      cell: ({ getValue }) => <div className="flex"><Ratings rating={getValue() as number} count={5} /></div>,
     },
     {
       accessorKey: "message",
       header: "Message",
-      
+      cell: info => <span className="text-muted-foreground line-clamp-2">{info.getValue() as string}</span>
     },
   ];
 
@@ -722,151 +654,69 @@ function MyTable({ data }: { data: Feedback[] }) {
   });
 
   return (
-    <div className="p-1 bg-slate-300 shadow-2xl rounded-lg overflow-x-auto">
-      <div className="">
-      <table className="w-fit">
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id} className="border-b border-gray-400">
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} className="p-2 md:p-3 text-center">
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="bg-gray-300 dark:border-separate rounded-3xl ">
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="font-serif text-justify animate-custom-bounce p-3">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="glass-panel p-6 rounded-2xl space-y-6">
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold text-foreground tracking-tight glow-text">Recent Feedback</h3>
+        <span className="text-xs text-muted-foreground uppercase tracking-widest bg-white/5 px-2 py-1 rounded-full">{data.length} entries</span>
       </div>
+
+      <div className="rounded-xl border border-border overflow-hidden bg-muted/20 dark:bg-black/20">
+        <table className="w-full text-sm">
+          <thead className="bg-muted/50 dark:bg-white/5">
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id} className="p-4 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground border-b border-border">
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id} className="hover:bg-muted/50 dark:hover:bg-white/5 transition-colors border-b border-border last:border-0 group">
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id} className="p-4 text-muted-foreground group-hover:text-foreground transition-colors">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       {/* Pagination */}
-      <div className="h-4 flex flex-row sm:flex-row items-center justify-between " />
-       <div className="flex items-center gap-2">
-         <button
-          className="border  rounded p-1 bg-gray-400 cursor-pointer "
-          onClick={() => table.firstPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          <ChevronsLeft/>
-        </button>
-        <button
-          className="border rounded p-1 bg-gray-400 cursor-pointer "
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          
-          <ChevronLeft/>
-        </button>
-        <button
-          className="border rounded p-1 bg-gray-400 cursor-pointer"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          <ChevronRight/>
-        </button>
-        <button
-          className="border rounded p-1 bg-gray-400 cursor-pointer "
-          onClick={() => table.lastPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          <ChevronsRight/>
-        </button>
+      <div className="flex items-center justify-between p-2 pt-4 border-t border-border">
+        <span className="text-xs text-muted-foreground">
+          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+        </span>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+            className="h-8 w-8 border-border bg-transparent hover:bg-muted"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+            className="h-8 w-8 border-border bg-transparent hover:bg-muted"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
         </div>
-        <div className="flex items-center gap-2 text-sm">
-        <span className="flex font-mono items-center bg-gray-300 gap-1">
-          | Go to page: </span>
-          <input 
-            type="number"
-            min="1"
-            max={table.getPageCount()}
-            defaultValue={table.getState().pagination.pageIndex + 1}
-            onChange={e => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0
-              table.setPageIndex(page)
-            }}
-            className="border p-1 rounded w-16 bg-gray-400"
-          />
-         <span>of {table.getPageCount()}</span>
-        <select className="text-mono rounded-lg bg-gray-300"
-          value={table.getState().pagination.pageSize}
-          onChange={e => {
-            table.setPageSize(Number(e.target.value))
-          }}
-        >
-          {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize} >
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
       </div>
     </div>
-//   )
-// }
-   
-        )
-      }
-function Filter({
-    column,
-    table,
-  }: {
-    column: Column<any, any>
-    table: TanstackTable<any>
-  }) {
-    const firstValue = table
-      .getPreFilteredRowModel()
-      .flatRows[0]?.getValue(column.id)
-  
-    const columnFilterValue = column.getFilterValue()
-  
-    return typeof firstValue === 'number' ? (
-      <div className="flex space-x-2" onClick={e => e.stopPropagation()}>
-        <input
-          type="number"
-          value={(columnFilterValue as [number, number])?.[0] ?? ''}
-          onChange={e =>
-            column.setFilterValue((old: [number, number]) => [
-              e.target.value,
-              old?.[1],
-            ])
-          }
-          placeholder={`Min`}
-          className="w-24 border shadow rounded"
-        />
-        <input
-          type="number"
-          value={(columnFilterValue as [number, number])?.[1] ?? ''}
-          onChange={e =>
-            column.setFilterValue((old: [number, number]) => [
-              old?.[0],
-              e.target.value,
-            ])
-          }
-          placeholder={`Max`}
-          className="w-24 border shadow rounded"
-        />
-      </div>
-    ) : (
-      <input
-        className="w-36 border shadow rounded p-1 text-slate-800 font-thin"
-        onChange={e => column.setFilterValue(e.target.value)}
-        onClick={e => e.stopPropagation()}
-        placeholder={`Search...`}
-        type="text"
-        value={(columnFilterValue ?? '') as string}
-      />
-    )
-  }
+  );
+}
 
 export default Table;
+
 
