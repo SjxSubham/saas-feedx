@@ -9,51 +9,52 @@ import {
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react'; 
+import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import HeaderMenu from './header-menu';
 import Loading from '@/app/(user)/loading';
 import ThemeToggleButton from '@/components/ThemeToggleButton';
 
 const PageHeader = () => {
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
 
     return (
-        <header className='w-full justify-between sticky inset-x-0 top-0 z-30 transition-all bg-white/20 backdrop-blur-md'>
-            <div className='w-full max-w-screen-xl px-2.5 lg:px-20 relative mx-auto border-stone-100'>
-                <div className='flex h-14 items-center justify-between'>
-                    <Link href="/" className="relative">
+        <header className='w-full justify-between sticky inset-x-0 top-0 z-30 transition-all bg-background/80 backdrop-blur-md border-b border-white/5'>
+            <div className='w-full max-w-screen-xl px-2.5 lg:px-20 relative mx-auto'>
+                <div className='flex h-16 items-center justify-between'>
+                    <Link href="/" className="relative group">
                         {loading ? (
                             <Loading />
                         ) : (
-                            < div className="relative w-[110px] h-[90px] flex items-center justify-center">
-                                
-                                    <Image 
-                                        src="/image.svg" 
-                                        alt="FeedX Logo" 
-                                        width={100} 
-                                        height={90}
-                                        className="object-contain h-14 dark:bg-gradient-to-r from-purple-400  to-purple-300 rounded-xl "
-                                        priority
-                                    />
+                            <div className="relative w-[110px] h-[90px] flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                                <Image
+                                    src="/image.svg"
+                                    alt="FeedX Logo"
+                                    width={100}
+                                    height={90}
+                                    className="object-contain h-14 dark:invert"
+                                    priority
+                                />
                             </div>
                         )}
                     </Link>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-6">
                         <SignedOut>
                             <SignInButton>
-                                <Button className='bg-black rounded-md'>Sign IN</Button>
+                                <Button variant="ghost" className='text-muted-foreground hover:text-foreground transition-colors'>Sign In</Button>
                             </SignInButton>
                             <SignUpButton>
-                                <Button className='bg-slate-600 ml-2 rounded-md'>Sign Up</Button>
+                                <Button className='bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity rounded-full px-6 shadow-[0_0_20px_rgba(124,58,237,0.3)]'>
+                                    Get Started
+                                </Button>
                             </SignUpButton>
                         </SignedOut>
                         <SignedIn>
-                            <div className='flex '>
-                            <ThemeToggleButton/> 
+                            <div className='flex items-center gap-4'>
+                                <ThemeToggleButton />
+                                <HeaderMenu />
+                                <UserButton />
                             </div>
-                            <HeaderMenu />
-                            <UserButton />
                         </SignedIn>
                     </div>
                 </div>

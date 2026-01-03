@@ -1,37 +1,30 @@
 import {
   ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
 } from '@clerk/nextjs'
 import './globals.css'
 import PageHeader from '@/components/page-headers'
 import { ThemeProvider } from '@/components/ThemeContext';
 import { Toaster } from 'react-hot-toast';
+import { Outfit } from 'next/font/google';
 
+const outfit = Outfit({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return (   
+  return (
     <ClerkProvider>
-     <html lang = "en">
-     
-<body>
-{/* <Script id="feedx-widget" src='https://feed-x-widget.vercel.app/widget.umd.js'>
-</Script> */}
-<Toaster position="top-center" />
+      <html lang="en">
+        <body className={outfit.className}>
+          <Toaster position="top-center" />
           <ThemeProvider>
-          <PageHeader/>
-          
-          {children}
+            <PageHeader />
+            {children}
           </ThemeProvider>
-          </body>
+        </body>
       </html>
     </ClerkProvider>
-    
   );
 }
