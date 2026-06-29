@@ -156,7 +156,7 @@ const PricingCard = ({
             <div className="relative">
               <div className="absolute inset-0 bg-primary blur-md opacity-50" />
               <div className="relative px-6 py-2 rounded-b-xl bg-primary text-primary-foreground text-sm font-bold flex items-center gap-2">
-                <Sparkles className="w-4 h-4" />
+                {/*<Sparkles className="w-4 h-4" />*/}
                 Most Popular
               </div>
             </div>

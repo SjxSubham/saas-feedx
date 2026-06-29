@@ -14,7 +14,7 @@ export default defineConfig({
   },
   dbCredentials: {
     
-    url: process.env.DATABASE_URL ||  'postgres://localhost:5432/drizzle' // 5432 optioanl
+    url: process.env.DATABASE_URL!,
         
   }
 });
